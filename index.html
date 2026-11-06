@@ -1,338 +1,344 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hotel Vista Grande | Luxury Resort & Sanctuary</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hotel Vista Grande | Elegancia y Descanso</title>
+  <meta name="description" content="Hotel Vista Grande: habitaciones de lujo, atención personalizada y una experiencia inolvidable.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Header Navigation -->
-    <header class="navbar" id="navbar">
-        <div class="nav-container">
-            <a href="#" class="brand-logo">
-                <span class="logo-title">VISTA GRANDE</span>
-                <span class="logo-sub">LUXURY HOTEL</span>
-            </a>
-            <nav class="nav-links">
-                <a href="#inicio" class="nav-link">Inicio</a>
-                <a href="#experiencia" class="nav-link">Experiencia</a>
-                <a href="#habitaciones" class="nav-link">Habitaciones</a>
-                <a href="#galeria" class="nav-link">Galería</a>
-                <a href="#contacto" class="nav-link">Contacto</a>
-            </nav>
-            <a href="#contacto" class="btn-primary nav-btn">Reservar Ahora</a>
-            <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
-                <span></span>
-                <span></span>
-            </button>
-        </div>
-    </header>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
 
-    <!-- Mobile Drawer -->
-    <div class="mobile-nav" id="mobile-nav">
-        <a href="#inicio" class="mobile-link">Inicio</a>
-        <a href="#experiencia" class="mobile-link">Experiencia</a>
-        <a href="#habitaciones" class="mobile-link">Habitaciones</a>
-        <a href="#galeria" class="mobile-link">Galería</a>
-        <a href="#contacto" class="mobile-link">Contacto</a>
+  <!-- ===== HEADER ===== -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="#inicio" class="logo" aria-label="Hotel Vista Grande - Inicio">
+        <span class="logo__top">Hotel</span>
+        <span class="logo__name">Vista Grande</span>
+      </a>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="navMenu">
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="nav" id="navMenu" aria-label="Navegación principal">
+        <ul class="nav__list">
+          <li><a href="#inicio" class="nav__link">Inicio</a></li>
+          <li><a href="#nosotros" class="nav__link">Nosotros</a></li>
+          <li><a href="#habitaciones" class="nav__link">Habitaciones</a></li>
+          <li><a href="#experiencias" class="nav__link">Experiencias</a></li>
+          <li><a href="#contacto" class="nav__link">Contacto</a></li>
+        </ul>
+      </nav>
     </div>
+  </header>
 
-    <!-- Hero Section -->
-    <section id="inicio" class="hero">
-        <div class="hero-bg" style="background-image: url('fachada.jpg');"></div>
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <span class="badge reveal-fade">EXCLUSIVIDAD & REFINAMIENTO</span>
-            <h1 class="hero-title reveal-slide">Un Refugio Sublime para los Sentidos</h1>
-            <p class="hero-subtitle reveal-slide-delay">Donde el diseño arquitectónico de vanguardia abraza la serenidad natural.</p>
-            <div class="hero-actions reveal-fade-delay">
-                <a href="#contacto" class="btn-primary">Explorar Disponibilidad</a>
-                <a href="#experiencia" class="btn-secondary">Descubrir Más</a>
-            </div>
+  <main id="main">
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="inicio">
+      <div class="hero__media">
+        <img src="fachada.jpg" alt="Fachada principal del Hotel Vista Grande al atardecer" class="hero__img" id="heroImg">
+      </div>
+      <div class="hero__overlay" aria-hidden="true"></div>
+
+      <div class="hero__content container">
+        <span class="eyebrow" data-reveal>Bienvenido al refugio de lujo</span>
+        <h1 class="hero__title" data-reveal data-delay="150">
+          Donde cada vista <em>se convierte en recuerdo</em>
+        </h1>
+        <p class="hero__text" data-reveal data-delay="300">
+          Un espacio pensado para el descanso absoluto, con atención personalizada, arquitectura serena y detalles que hablan por sí solos.
+        </p>
+        <div class="hero__actions" data-reveal data-delay="450">
+          <a href="#habitaciones" class="btn btn--primary">Descubrir habitaciones</a>
+          <a href="#contacto" class="btn btn--ghost">Solicitar información</a>
         </div>
-        <div class="scroll-indicator">
-            <span>SCROLL</span>
-            <div class="scroll-line"></div>
-        </div>
+      </div>
+
+      <a href="#nosotros" class="scroll-hint" aria-label="Desplazarse hacia abajo">
+        <span></span>
+      </a>
     </section>
 
-    <!-- Quick Booking Bar -->
-    <div class="booking-bar-wrapper">
-        <form class="booking-bar reveal-fade" onsubmit="event.preventDefault();">
-            <div class="booking-field">
-                <label for="checkin">LLEGADA</label>
-                <input type="date" id="checkin">
+    <!-- ===== NOSOTROS ===== -->
+    <section class="section about" id="nosotros">
+      <div class="container about__grid">
+        <div class="about__image" data-reveal="left">
+          <img src="entrada.jpg" alt="Entrada principal del Hotel Vista Grande">
+          <div class="about__frame" aria-hidden="true"></div>
+        </div>
+
+        <div class="about__content">
+          <span class="eyebrow" data-reveal>Nuestra historia</span>
+          <h2 class="section-title" data-reveal data-delay="120">
+            Una hospitalidad <em>sin prisas</em>
+          </h2>
+          <p class="text-body" data-reveal data-delay="200">
+            Desde su apertura, Hotel Vista Grande ha cultivado una filosofía sencilla: cada huésped merece sentirse único. Nuestro equipo combina calidez humana con un servicio discreto y altamente cuidado.
+          </p>
+          <p class="text-body" data-reveal data-delay="280">
+            Cada rincón fue diseñado para equilibrar sofisticación y confort, con materiales nobles, luz natural y una paleta cromática que invita a la calma.
+          </p>
+
+          <div class="stats" data-reveal data-delay="360">
+            <div class="stat">
+              <span class="stat__number" data-count="12">0</span>
+              <span class="stat__label">Años de experiencia</span>
             </div>
-            <div class="booking-field">
-                <label for="checkout">SALIDA</label>
-                <input type="date" id="checkout">
+            <div class="stat">
+              <span class="stat__number" data-count="96">0</span>
+              <span class="stat__label">Habitaciones de autor</span>
             </div>
-            <div class="booking-field">
-                <label for="guests">HUÉSPEDES</label>
-                <select id="guests">
-                    <option>1 Huésped</option>
-                    <option selected>2 Huéspedes</option>
-                    <option>3+ Huéspedes</option>
-                </select>
+            <div class="stat">
+              <span class="stat__number" data-count="4.9">0</span>
+              <span class="stat__label">Valoración media</span>
             </div>
-            <div class="booking-field">
-                <label for="suite-type">SUITE</label>
-                <select id="suite-type">
-                    <option>Todas las Suites</option>
-                    <option>Master Suite</option>
-                    <option>Deluxe Sanctuary</option>
-                </select>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== RECEPCIÓN / BIENVENIDA ===== -->
+    <section class="section welcome" id="recepcion">
+      <div class="welcome__media" data-reveal>
+        <img src="recepcion.jpg" alt="Recepción del Hotel Vista Grande con diseño contemporáneo">
+      </div>
+      <div class="welcome__content container" data-reveal data-delay="150">
+        <span class="eyebrow">Recepción</span>
+        <h2 class="section-title">Un primer saludo <em>inolvidable</em></h2>
+        <p class="text-body">
+          Nuestra recepción es el punto de encuentro entre la bienvenida y el descanso. Un equipo disponible las 24 horas está listo para resolver cada necesidad antes de que la menciones.
+        </p>
+        <ul class="check-list">
+          <li>Check-in personalizado y express</li>
+          <li>Concierge disponible las 24 horas</li>
+          <li>Servicio de equipaje y traslados privados</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== HABITACIONES ===== -->
+    <section class="section rooms" id="habitaciones">
+      <div class="container">
+        <header class="section-header" data-reveal>
+          <span class="eyebrow">Alojamiento</span>
+          <h2 class="section-title">Habitaciones <em>de autor</em></h2>
+          <p class="section-subtitle">Espacios amplios, iluminados y diseñados para el máximo confort.</p>
+        </header>
+
+        <div class="rooms__grid">
+          <article class="room-card" data-reveal data-delay="0">
+            <div class="room-card__media">
+              <img src="habitacion.jpg" alt="Suite principal con cama king size y vistas panorámicas" loading="lazy">
             </div>
-            <button type="button" class="btn-primary booking-submit" id="btn-search">Consultar Tarifa</button>
+            <div class="room-card__body">
+              <span class="room-card__tag">Suite principal</span>
+              <h3 class="room-card__title">Suite Horizonte</h3>
+              <p class="room-card__text">Cama king size, zona de estar privada y ventanales de piso a techo con vistas panorámicas.</p>
+              <a href="#contacto" class="link-arrow">Consultar disponibilidad</a>
+            </div>
+          </article>
+
+          <article class="room-card" data-reveal data-delay="150">
+            <div class="room-card__media">
+              <img src="habitacion2.jpg" alt="Habitación deluxe con tonos cálidos y decoración minimalista" loading="lazy">
+            </div>
+            <div class="room-card__body">
+              <span class="room-card__tag">Habitación deluxe</span>
+              <h3 class="room-card__title">Habitación Serena</h3>
+              <p class="room-card__text">Ambientes cálidos, textiles de lino y un diseño minimalista pensado para el descanso profundo.</p>
+              <a href="#contacto" class="link-arrow">Consultar disponibilidad</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== BAÑOS ===== -->
+    <section class="section bathrooms" id="banos">
+      <div class="container">
+        <header class="section-header" data-reveal>
+          <span class="eyebrow">Detalles</span>
+          <h2 class="section-title">Baños <em>como santuarios</em></h2>
+          <p class="section-subtitle">Mármol, luz cuidada y amenidades de primera línea en cada espacio.</p>
+        </header>
+
+        <div class="bathrooms__grid">
+          <figure class="bath-item" data-reveal data-delay="0">
+            <img src="baño.jpg" alt="Baño principal con bañera de diseño y acabados en mármol" loading="lazy">
+            <figcaption class="bath-item__caption">
+              <span>Baño principal</span>
+              <p>Bañera exenta, ducha de lluvia y amenidades premium.</p>
+            </figcaption>
+          </figure>
+
+          <figure class="bath-item" data-reveal data-delay="150">
+            <img src="baño2.jpg" alt="Baño secundario con iluminación cálida y acabados elegantes" loading="lazy">
+            <figcaption class="bath-item__caption">
+              <span>Baño secundario</span>
+              <p>Diseño sobrio, iluminación envolvente y espacios de máxima privacidad.</p>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== EXPERIENCIAS ===== -->
+    <section class="section experiences" id="experiencias">
+      <div class="container">
+        <header class="section-header" data-reveal>
+          <span class="eyebrow">Servicios</span>
+          <h2 class="section-title">Experiencias <em>a medida</em></h2>
+        </header>
+
+        <div class="services__grid">
+          <article class="service-card" data-reveal data-delay="0">
+            <span class="service-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M4 20V10l8-6 8 6v10"/><path d="M9 20v-6h6v6"/></svg>
+            </span>
+            <h3>Spa & Bienestar</h3>
+            <p>Masajes terapéuticos, circuito de aguas y rituales de relajación con productos naturales.</p>
+          </article>
+
+          <article class="service-card" data-reveal data-delay="120">
+            <span class="service-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M3 12h18"/><path d="M5 12a7 7 0 0 1 14 0"/><path d="M12 5V3"/></svg>
+            </span>
+            <h3>Gastronomía</h3>
+            <p>Restaurante de autor con productos de temporada y una carta de vinos cuidadosamente seleccionada.</p>
+          </article>
+
+          <article class="service-card" data-reveal data-delay="240">
+            <span class="service-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>
+            </span>
+            <h3>Concierge Privado</h3>
+            <p>Reservas de experiencias, traslados exclusivos y recomendaciones personalizadas para cada estancia.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CONTACTO ===== -->
+    <section class="section contact" id="contacto">
+      <div class="container contact__grid">
+        <div class="contact__info" data-reveal="left">
+          <span class="eyebrow">Contacto</span>
+          <h2 class="section-title">Hablemos de <em>su próxima estancia</em></h2>
+          <p class="text-body">Nuestro equipo responderá a su consulta a la brevedad. También puede escribirnos directamente por WhatsApp.</p>
+
+          <ul class="contact__list">
+            <li>
+              <span class="contact__label">Teléfono</span>
+              <a href="tel:+542644393343">+54 264 439-3343</a>
+            </li>
+            <li>
+              <span class="contact__label">Horario de recepción</span>
+              <span>Atención las 24 horas, todos los días</span>
+            </li>
+          </ul>
+
+          <a href="https://wa.me/5426443933343" target="_blank" rel="noopener noreferrer" class="btn btn--primary btn--whatsapp">
+            Escribir por WhatsApp
+          </a>
+        </div>
+
+        <form class="contact__form" id="contactForm" data-reveal="right" data-delay="150" novalidate>
+          <div class="field">
+            <input type="text" id="name" name="name" placeholder=" " required autocomplete="name">
+            <label for="name">Nombre completo</label>
+            <span class="field__error" aria-live="polite"></span>
+          </div>
+
+          <div class="field">
+            <input type="email" id="email" name="email" placeholder=" " required autocomplete="email">
+            <label for="email">Correo electrónico</label>
+            <span class="field__error" aria-live="polite"></span>
+          </div>
+
+          <div class="field">
+            <select id="motivo" name="motivo" required>
+              <option value="" disabled selected>Motivo de su consulta</option>
+              <option>Habitaciones y tarifas</option>
+              <option>Eventos y celebraciones</option>
+              <option>Spa y bienestar</option>
+              <option>Otro</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <textarea id="message" name="message" rows="4" placeholder=" " required></textarea>
+            <label for="message">Su mensaje</label>
+            <span class="field__error" aria-live="polite"></span>
+          </div>
+
+          <button type="submit" class="btn btn--primary btn--block">Enviar consulta</button>
+          <p class="form__feedback" id="formFeedback" role="status" aria-live="polite"></p>
         </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== BOTÓN FLOTANTE WHATSAPP ===== -->
+  <a href="https://wa.me/5426443933343" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Escribir por WhatsApp al Hotel Vista Grande">
+    <span class="whatsapp-float__pulse" aria-hidden="true"></span>
+    <svg class="whatsapp-float__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M20.52 3.48A11.86 11.86 0 0 0 12.05 0C5.5 0 .17 5.33.17 11.89c0 2.1.55 4.14 1.59 5.94L0 24l6.3-1.65a11.85 11.85 0 0 0 5.74 1.46h.01c6.55 0 11.88-5.33 11.88-11.89 0-3.18-1.24-6.16-3.41-8.44zM12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.85 9.85 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.9-9.88a9.8 9.8 0 0 1 7 2.9 9.8 9.8 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.9 9.88zm5.43-7.4c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15s-.77.97-.94 1.17c-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.47-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.27.49 1.7.63.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35z"/>
+    </svg>
+  </a>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer__waves" aria-hidden="true">
+      <svg class="wave wave--back" viewBox="0 0 2880 120" preserveAspectRatio="none">
+        <path d="M0,60 C240,100 480,20 720,60 C960,100 1200,20 1440,60 C1680,100 1920,20 2160,60 C2400,100 2640,20 2880,60 L2880,120 L0,120 Z"/>
+      </svg>
+      <svg class="wave wave--mid" viewBox="0 0 2880 120" preserveAspectRatio="none">
+        <path d="M0,70 C300,30 420,100 720,70 C1020,40 1140,100 1440,70 C1740,30 1860,100 2160,70 C2460,40 2580,100 2880,70 L2880,120 L0,120 Z"/>
+      </svg>
+      <svg class="wave wave--front" viewBox="0 0 2880 120" preserveAspectRatio="none">
+        <path d="M0,85 C200,55 400,110 720,85 C1040,60 1240,110 1440,85 C1640,55 1840,110 2160,85 C2480,60 2680,110 2880,85 L2880,120 L0,120 Z"/>
+      </svg>
     </div>
 
-    <!-- Experience / About Section -->
-    <section id="experiencia" class="section experience">
-        <div class="container">
-            <div class="grid grid-2 flex-align-center">
-                <div class="exp-text">
-                    <span class="section-tag reveal-element">BIENVENIDO A VISTA GRANDE</span>
-                    <h2 class="section-title reveal-element">La Santidad del Espacio y el Tiempo</h2>
-                    <p class="section-desc reveal-element">Diseñado para responder a los estándares más exigentes de la hospitalidad contemporánea. Cada rincón refleja armonía, con acabados orgánicos y una iluminación curada minuciosamente para elevar su estadía.</p>
-                    
-                    <div class="features-list">
-                        <div class="feature-item reveal-element">
-                            <div class="feature-icon">✦</div>
-                            <div>
-                                <h4>Arquitectura Orgánica</h4>
-                                <p>Integración fluida entre espacios interiores de alta gama y el entorno visual.</p>
-                            </div>
-                        </div>
-                        <div class="feature-item reveal-element">
-                            <div class="feature-icon">✦</div>
-                            <div>
-                                <h4>Concierge Personalizado</h4>
-                                <p>Atención discreta y a medida las 24 horas del día.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="exp-media reveal-element">
-                    <div class="image-frame">
-                        <img src="recepcion.jpg" alt="Recepción Hotel Vista Grande" loading="lazy">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <div class="footer__content container">
+      <div class="footer__brand">
+        <span class="footer__logo">Hotel <em>Vista Grande</em></span>
+        <p>Elegancia, descanso y hospitalidad sin concesiones.</p>
+      </div>
 
-    <!-- Suites & Accommodations -->
-    <section id="habitaciones" class="section rooms">
-        <div class="container">
-            <div class="section-header center">
-                <span class="section-tag reveal-element">SUITES & RESIDENCIAS</span>
-                <h2 class="section-title reveal-element">Diseño Concebido para el Descanso</h2>
-            </div>
-            
-            <div class="grid grid-2">
-                <!-- Room 1 -->
-                <article class="room-card reveal-element">
-                    <div class="room-img-wrapper">
-                        <img src="habitacion.jpg" alt="Master Suite Vista Grande" loading="lazy">
-                        <span class="room-price">Desde $450 / noche</span>
-                    </div>
-                    <div class="room-content">
-                        <h3>Master Suite Ocean View</h3>
-                        <p>Espacios amplios dotados de vistas panorámicas, cama king-size con lino de 600 hilos y terraza privada.</p>
-                        <ul class="room-specs">
-                            <li>85 m²</li>
-                            <li>Vista Panorámica</li>
-                            <li>Cama King</li>
-                        </ul>
-                        <div class="room-footer">
-                            <a href="baño.jpg" class="room-link lightbox-trigger">Ver Baño Principal</a>
-                            <a href="#contacto" class="btn-secondary">Reservar Suite</a>
-                        </div>
-                    </div>
-                </article>
+      <div class="footer__col">
+        <h4>Explorar</h4>
+        <ul>
+          <li><a href="#nosotros">Nosotros</a></li>
+          <li><a href="#habitaciones">Habitaciones</a></li>
+          <li><a href="#experiencias">Experiencias</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </div>
 
-                <!-- Room 2 -->
-                <article class="room-card reveal-element">
-                    <div class="room-img-wrapper">
-                        <img src="habitacion2.jpg" alt="Deluxe Sanctuary Room" loading="lazy">
-                        <span class="room-price">Desde $320 / noche</span>
-                    </div>
-                    <div class="room-content">
-                        <h3>Deluxe Sanctuary Suite</h3>
-                        <p>Un ambiente sereno decorado con tonos cálidos y texturas naturales, ideal para estancias prolongadas de relajación.</p>
-                        <ul class="room-specs">
-                            <li>60 m²</li>
-                            <li>Jardín Privado</li>
-                            <li>Cama Queen</li>
-                        </ul>
-                        <div class="room-footer">
-                            <a href="baño2.jpg" class="room-link lightbox-trigger">Ver Baño Secundario</a>
-                            <a href="#contacto" class="btn-secondary">Reservar Suite</a>
-                        </div>
-                    </div>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <!-- Visual Gallery Grid -->
-    <section id="galeria" class="section gallery">
-        <div class="container">
-            <div class="section-header center">
-                <span class="section-tag reveal-element">GALERÍA EXCLUSIVA</span>
-                <h2 class="section-title reveal-element">Inspiración en Cada Ángulo</h2>
-            </div>
-            
-            <div class="gallery-grid">
-                <div class="gallery-item item-tall reveal-element">
-                    <img src="entrada.jpg" alt="Entrada Principal" loading="lazy">
-                    <div class="gallery-overlay">
-                        <span>Entrada Principal</span>
-                    </div>
-                </div>
-                <div class="gallery-item reveal-element">
-                    <img src="recepcion.jpg" alt="Recepción" loading="lazy">
-                    <div class="gallery-overlay">
-                        <span>Lobby & Recepción</span>
-                    </div>
-                </div>
-                <div class="gallery-item reveal-element">
-                    <img src="baño.jpg" alt="Baño Principal" loading="lazy">
-                    <div class="gallery-overlay">
-                        <span>Baño Suite Principal</span>
-                    </div>
-                </div>
-                <div class="gallery-item item-wide reveal-element">
-                    <img src="fachada.jpg" alt="Fachada Exterior" loading="lazy">
-                    <div class="gallery-overlay">
-                        <span>Arquitectura Exterior</span>
-                    </div>
-                </div>
-                <div class="gallery-item reveal-element">
-                    <img src="baño2.jpg" alt="Baño Secundario" loading="lazy">
-                    <div class="gallery-overlay">
-                        <span>Baño Sanctuary</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact & Inquiries -->
-    <section id="contacto" class="section contact">
-        <div class="container">
-            <div class="grid grid-2 flex-align-center">
-                <div class="contact-info reveal-element">
-                    <span class="section-tag">ATENCIÓN EXCLUSIVA</span>
-                    <h2 class="section-title">Planifique su Estadía</h2>
-                    <p class="section-desc">Nuestro equipo de concierge está disponible para personalizar cada detalle de su visita. Contáctenos directamente.</p>
-                    
-                    <div class="contact-details">
-                        <div class="contact-detail">
-                            <span class="detail-label">DIRECCIÓN</span>
-                            <span class="detail-val">Av. Costanera Gourmet 1450, Argentina</span>
-                        </div>
-                        <div class="contact-detail">
-                            <span class="detail-label">TELÉFONO</span>
-                            <span class="detail-val">+54 264 439-3343</span>
-                        </div>
-                        <div class="contact-detail">
-                            <span class="detail-label">EMAIL</span>
-                            <span class="detail-val">reservas@hotelvistagrande.com</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="contact-form-card reveal-element">
-                    <form class="contact-form" id="main-form">
-                        <h3>Solicitud de Reserva</h3>
-                        <div class="form-group">
-                            <input type="text" required placeholder="Nombre Completo">
-                        </div>
-                        <div class="form-group">
-                            <input type="email" required placeholder="Correo Electrónico">
-                        </div>
-                        <div class="form-group">
-                            <input type="tel" placeholder="Teléfono de Contacto">
-                        </div>
-                        <div class="form-group">
-                            <textarea rows="4" placeholder="Mensaje o Requerimientos Especiales"></textarea>
-                        </div>
-                        <button type="submit" class="btn-primary full-width">Enviar Consulta</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Waves Waveform Footer -->
-    <footer class="footer">
-        <!-- SVG Ocean Wave Animation Structure -->
-        <div class="ocean-waves">
-            <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
-                <defs>
-                    <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
-                </defs>
-                <g class="parallax-waves">
-                    <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(88, 14, 25, 0.7)" />
-                    <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(64, 9, 17, 0.5)" />
-                    <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(42, 4, 10, 0.3)" />
-                    <use xlink:href="#gentle-wave" x="48" y="7" fill="#2a040a" />
-                </g>
-            </svg>
-        </div>
-
-        <div class="footer-content container">
-            <div class="footer-brand">
-                <a href="#" class="brand-logo light">
-                    <span class="logo-title">VISTA GRANDE</span>
-                    <span class="logo-sub">LUXURY HOTEL</span>
-                </a>
-                <p>Una experiencia distinguida creada para quienes aprecian la elegancia atemporal y el máximo confort.</p>
-            </div>
-            
-            <div class="footer-links">
-                <h4>Navegación</h4>
-                <ul>
-                    <li><a href="#inicio">Inicio</a></li>
-                    <li><a href="#experiencia">Experiencia</a></li>
-                    <li><a href="#habitaciones">Habitaciones</a></li>
-                    <li><a href="#galeria">Galería</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-legal">
-                <h4>Contacto Rápido</h4>
-                <p>Tel: +54 264 439-3343</p>
-                <p>San Juan, Argentina</p>
-            </div>
-        </div>
-
-        <div class="footer-bottom center">
-            <p>&copy; 2026 Hotel Vista Grande. Todos los derechos reservados. Diseño y Experiencia Digital de Alto Nivel.</p>
-        </div>
-    </footer>
-
-    <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/542644393343" class="whatsapp-btn" target="_blank" rel="noopener noreferrer" aria-label="Contacto por WhatsApp">
-        <svg viewBox="0 0 32 32" class="whatsapp-icon">
-            <path d="M16 0c-8.837 0-16 7.163-16 16 0 2.825 0.737 5.607 2.137 8.048l-2.137 7.952 8.147-2.135c2.375 1.299 5.066 1.983 7.853 1.983 8.837 0 16-7.163 16-16s-7.163-16-16-16zM16 29.35c-2.48 0-4.908-0.667-7.031-1.928l-0.504-0.3-5.234 1.371 1.396-5.195-0.331-0.526c-1.385-2.201-2.117-4.747-2.117-7.372 0-7.594 6.177-13.771 13.771-13.771 7.594 0 13.771 6.177 13.771 13.771s-6.177 13.95-13.721 13.95zM23.364 19.349c-0.404-0.202-2.39-1.18-2.761-1.315-0.371-0.135-0.641-0.202-0.911 0.202s-1.047 1.315-1.283 1.585c-0.236 0.27-0.472 0.304-0.876 0.101s-1.706-0.629-3.249-2.005c-1.202-1.071-2.014-2.394-2.25-2.798s-0.025-0.622 0.177-0.823c0.182-0.181 0.404-0.472 0.606-0.708s0.27-0.404 0.404-0.674c0.135-0.27 0.067-0.506-0.034-0.708s-0.911-2.193-1.248-3.003c-0.328-0.789-0.662-0.682-0.911-0.695-0.236-0.012-0.506-0.014-0.776-0.014s-0.708 0.101-1.079 0.506c-0.371 0.404-1.416 1.383-1.416 3.373s1.45 3.913 1.652 4.183c0.202 0.27 2.853 4.357 6.911 6.111 0.965 0.417 1.719 0.666 2.307 0.853 0.969 0.308 1.851 0.265 2.548 0.161 0.777-0.116 2.39-0.977 2.727-1.922s0.337-1.753 0.236-1.922c-0.101-0.168-0.371-0.27-0.775-0.472z"/>
-        </svg>
-        <span class="whatsapp-pulse"></span>
-    </a>
-
-    <!-- Simple Lightbox Modal -->
-    <div class="lightbox-modal" id="lightbox-modal">
-        <span class="lightbox-close">&times;</span>
-        <img class="lightbox-content" id="lightbox-img" alt="Vista Ampliada">
+      <div class="footer__col">
+        <h4>Contacto</h4>
+        <ul>
+          <li><a href="tel:+542644393343">+54 264 439-3343</a></li>
+          <li><a href="https://wa.me/5426443933343" target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
+        </ul>
+      </div>
     </div>
 
-    <script src="script.js"></script>
+    <div class="footer__bottom container">
+      <p>&copy; <span id="year"></span> Hotel Vista Grande. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>

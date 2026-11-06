@@ -1,146 +1,262 @@
-document.addEventListener('DOMContentLoaded', () => {
+/* =========================================================
+   HOTEL VISTA GRANDE — script.js
+   ========================================================= */
 
-    /* ==========================================================================
-       NAVBAR SCROLL EFFECT
-       ========================================================================== */
-    const navbar = document.getElementById('navbar');
-    
-    const handleScroll = () => {
-        if (window.scrollY > 80) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
-        }
-    };
+(function () {
+  "use strict";
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    /* ==========================================================================
-       MOBILE MENU TOGGLE
-       ========================================================================== */
-    const menuToggle = document.getElementById('menu-toggle');
-    const mobileNav = document.getElementById('mobile-nav');
-    const mobileLinks = document.querySelectorAll('.mobile-link');
+  /* ---------- Año automático en el footer ---------- */
+  const yearEl = document.getElementById("year");
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-    menuToggle.addEventListener('click', () => {
-        mobileNav.classList.toggle('active');
-        document.body.classList.toggle('no-scroll');
+  /* ---------- Header: estado al hacer scroll ---------- */
+  const header = document.getElementById("header");
+  const onScroll = () => {
+    if (!header) return;
+    header.classList.toggle("is-scrolled", window.scrollY > 60);
+  };
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  /* ---------- Menú móvil ---------- */
+  const menuToggle = document.getElementById("menuToggle");
+  const navMenu = document.getElementById("navMenu");
+
+  const setMenu = (open) => {
+    if (!menuToggle || !navMenu) return;
+    menuToggle.classList.toggle("is-open", open);
+    navMenu.classList.toggle("is-open", open);
+    menuToggle.setAttribute("aria-expanded", String(open));
+    menuToggle.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú");
+    document.body.style.overflow = open ? "hidden" : "";
+  };
+
+  if (menuToggle && navMenu) {
+    menuToggle.addEventListener("click", () => {
+      setMenu(!navMenu.classList.contains("is-open"));
     });
 
-    mobileLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            mobileNav.classList.remove('active');
-            document.body.classList.remove('no-scroll');
+    navMenu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => setMenu(false));
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") setMenu(false);
+    });
+  }
+
+  /* ---------- Revelado de elementos con Intersection Observer ---------- */
+  const revealElements = document.querySelectorAll("[data-reveal]");
+
+  // Cada elemento usa su propio retardo definido en data-delay (ms)
+  revealElements.forEach((el) => {
+    const delay = parseInt(el.dataset.delay, 10) || 0;
+    el.style.setProperty("--reveal-delay", delay + "ms");
+  });
+
+  if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+    revealElements.forEach((el) => el.classList.add("is-visible"));
+  } else {
+    const revealObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
         });
-    });
-
-    /* ==========================================================================
-       INTERSECTION OBSERVER (INDIVIDUALIZED REVEAL ANIMATIONS)
-       ========================================================================== */
-    const revealElements = document.querySelectorAll(
-        '.reveal-fade, .reveal-slide, .reveal-slide-delay, .reveal-fade-delay, .reveal-element'
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -60px 0px" }
     );
 
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px 0px -50px 0px',
-        threshold: 0.15
+    revealElements.forEach((el) => revealObserver.observe(el));
+  }
+
+  /* ---------- Contadores animados en estadísticas ---------- */
+  const counters = document.querySelectorAll("[data-count]");
+
+  const animateCounter = (el) => {
+    const target = parseFloat(el.dataset.count);
+    const isDecimal = target % 1 !== 0;
+    const duration = 1800;
+    const start = performance.now();
+
+    const step = (now) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 4);
+      const value = target * eased;
+      el.textContent = isDecimal ? value.toFixed(1) : Math.floor(value).toString();
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      } else {
+        el.textContent = isDecimal ? target.toFixed(1) : target.toString();
+      }
     };
 
-    const revealObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
+    requestAnimationFrame(step);
+  };
+
+  if (counters.length) {
+    if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+      counters.forEach((el) => {
+        const t = parseFloat(el.dataset.count);
+        el.textContent = t % 1 !== 0 ? t.toFixed(1) : t;
+      });
+    } else {
+      const counterObserver = new IntersectionObserver(
+        (entries, observer) => {
+          entries.forEach((entry) => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-                // Optional: Stop observing once animated
-                observer.unobserve(entry.target);
+              animateCounter(entry.target);
+              observer.unobserve(entry.target);
             }
+          });
+        },
+        { threshold: 0.6 }
+      );
+      counters.forEach((el) => counterObserver.observe(el));
+    }
+  }
+
+  /* ---------- Parallax suave en el hero ---------- */
+  const heroImg = document.getElementById("heroImg");
+  if (heroImg && !prefersReducedMotion) {
+    let ticking = false;
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+          const offset = Math.min(window.scrollY, window.innerHeight);
+          heroImg.style.translate = `0 ${offset * 0.25}px`;
+          ticking = false;
         });
-    }, observerOptions);
+      },
+      { passive: true }
+    );
+  }
 
-    revealElements.forEach(el => revealObserver.observe(el));
+  /* ---------- Resaltado de enlace activo según sección visible ---------- */
+  const sections = document.querySelectorAll("main section[id]");
+  const navLinks = document.querySelectorAll(".nav__link");
 
-    /* ==========================================================================
-       LIGHTBOX FUNCTIONALITY FOR ROOM BATHROOMS & GALLERY
-       ========================================================================== */
-    const lightboxModal = document.getElementById('lightbox-modal');
-    const lightboxImg = document.getElementById('lightbox-img');
-    const lightboxClose = document.querySelector('.lightbox-close');
-    const triggers = document.querySelectorAll('.lightbox-trigger, .gallery-item img');
-
-    triggers.forEach(trigger => {
-        trigger.addEventListener('click', (e) => {
-            e.preventDefault();
-            const imgSrc = trigger.tagName === 'IMG' ? trigger.src : trigger.getAttribute('href');
-            lightboxImg.src = imgSrc;
-            lightboxModal.classList.add('active');
+  if (sections.length && navLinks.length && "IntersectionObserver" in window) {
+    const activeObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            navLinks.forEach((link) => {
+              const isActive = link.getAttribute("href") === `#${id}`;
+              link.style.color = isActive ? "var(--gold)" : "";
+            });
+          }
         });
+      },
+      { threshold: 0.45 }
+    );
+    sections.forEach((s) => activeObserver.observe(s));
+  }
+
+  /* ---------- Formulario de contacto (simulado, sin envío real) ---------- */
+  const form = document.getElementById("contactForm");
+  const feedback = document.getElementById("formFeedback");
+
+  if (form) {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+    const setError = (field, message) => {
+      const wrapper = field.closest(".field");
+      const errorEl = wrapper ? wrapper.querySelector(".field__error") : null;
+      if (message) {
+        wrapper.classList.add("has-error");
+        if (errorEl) errorEl.textContent = message;
+      } else {
+        wrapper.classList.remove("has-error");
+        if (errorEl) errorEl.textContent = "";
+      }
+    };
+
+    const validateField = (field) => {
+      const value = field.value.trim();
+      if (field.required && !value) {
+        setError(field, "Este campo es obligatorio.");
+        return false;
+      }
+      if (field.type === "email" && value && !emailPattern.test(value)) {
+        setError(field, "Ingrese un correo electrónico válido.");
+        return false;
+      }
+      setError(field, "");
+      return true;
+    };
+
+    form.querySelectorAll("input, textarea").forEach((field) => {
+      field.addEventListener("blur", () => validateField(field));
+      field.addEventListener("input", () => {
+        if (field.closest(".field").classList.contains("has-error")) validateField(field);
+      });
     });
 
-    lightboxClose.addEventListener('click', () => {
-        lightboxModal.classList.remove('active');
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const fields = form.querySelectorAll("input, textarea");
+      let valid = true;
+      fields.forEach((field) => {
+        if (!validateField(field)) valid = false;
+      });
+
+      if (!valid) {
+        const firstError = form.querySelector(".has-error input, .has-error textarea");
+        if (firstError) firstError.focus();
+        return;
+      }
+
+      const btn = form.querySelector('button[type="submit"]');
+      const originalText = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = "Enviando...";
+
+      // Simulación visual: no existe un sistema de reservas real.
+      setTimeout(() => {
+        btn.textContent = "¡Mensaje recibido!";
+        feedback.textContent = "Gracias por su interés. Un miembro de nuestro equipo se comunicará con usted a la brevedad.";
+        feedback.classList.add("is-visible");
+        form.reset();
+
+        // Reinicia las etiquetas flotantes tras el reset
+        form.querySelectorAll(".field label").forEach(() => {});
+
+        setTimeout(() => {
+          btn.disabled = false;
+          btn.textContent = originalText;
+          feedback.classList.remove("is-visible");
+        }, 4500);
+      }, 1200);
     });
+  }
 
-    lightboxModal.addEventListener('click', (e) => {
-        if (e.target === lightboxModal) {
-            lightboxModal.classList.remove('active');
-        }
+  /* ---------- Desplazamiento suave con compensación del header ---------- */
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", (e) => {
+      const targetId = anchor.getAttribute("href");
+      if (targetId === "#" || targetId.length < 2) return;
+
+      const target = document.querySelector(targetId);
+      if (!target) return;
+
+      e.preventDefault();
+      const headerH = header ? header.offsetHeight : 0;
+      const top = target.getBoundingClientRect().top + window.scrollY - headerH + 1;
+
+      window.scrollTo({
+        top,
+        behavior: prefersReducedMotion ? "auto" : "smooth",
+      });
     });
-
-    /* ==========================================================================
-       BOOKING BAR & FORM INTERACTION (VISUAL FEEDBACK)
-       ========================================================================== */
-    const btnSearch = document.getElementById('btn-search');
-    if (btnSearch) {
-        btnSearch.addEventListener('click', () => {
-            const checkin = document.getElementById('checkin').value;
-            const checkout = document.getElementById('checkout').value;
-            
-            if (!checkin || !checkout) {
-                alert('Por favor, seleccione sus fechas de llegada y salida.');
-                return;
-            }
-            
-            btnSearch.textContent = 'Buscando...';
-            setTimeout(() => {
-                btnSearch.textContent = 'Disponibilidad Confirmada';
-                btnSearch.style.backgroundColor = '#28a745';
-                btnSearch.style.borderColor = '#28a745';
-                
-                setTimeout(() => {
-                    const contactSection = document.getElementById('contacto');
-                    contactSection.scrollIntoView({ behavior: 'smooth' });
-                }, 800);
-            }, 1000);
-        });
-    }
-
-    const mainForm = document.getElementById('main-form');
-    if (mainForm) {
-        mainForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const submitBtn = mainForm.querySelector('button[type="submit"]');
-            submitBtn.textContent = 'Enviando Solicitud...';
-            
-            setTimeout(() => {
-                submitBtn.textContent = 'Solicitud Enviada con Éxito';
-                submitBtn.style.backgroundColor = '#28a745';
-                submitBtn.style.borderColor = '#28a745';
-                mainForm.reset();
-            }, 1200);
-        });
-    }
-
-    /* Set default dates in booking bar */
-    const today = new Date().toISOString().split('T')[0];
-    const tomorrowDate = new Date();
-    tomorrowDate.setDate(tomorrowDate.getDate() + 3);
-    const tomorrow = tomorrowDate.toISOString().split('T')[0];
-
-    const checkinInput = document.getElementById('checkin');
-    const checkoutInput = document.getElementById('checkout');
-    
-    if (checkinInput && checkoutInput) {
-        checkinInput.value = today;
-        checkoutInput.value = tomorrow;
-    }
-});
+  });
+})();
